@@ -1,0 +1,40 @@
+services:
+  nginx-http:
+    image: "nginx"
+    profiles: ["http"]
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d/http.conf:/etc/nginx/conf.d/http.conf
+      - ./nginx/common:/etc/nginx/common
+      - ./nginx/html:/usr/share/nginx
+      - ./cert/hoge.crt:/etc/certificates/hoge.crt
+      - ./cert/hoge.key:/etc/certificates/hoge.key
+      - ./cert/dhparam.pem:/etc/certificates/dhparam.pem
+  nginx-https:
+    image: "nginx"
+    profiles: ["https"]
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d/https.conf:/etc/nginx/conf.d/https.conf
+      - ./nginx/common:/etc/nginx/common
+      - ./nginx/html:/usr/share/nginx
+      - ./cert/hoge.crt:/etc/certificates/hoge.crt
+      - ./cert/hoge.key:/etc/certificates/hoge.key
+      - ./cert/dhparam.pem:/etc/certificates/dhparam.pem
+  unit-http:
+    image: "unit:php"
+    profiles: ["http"]
+    volumes:
+      - ./unit/http.json:/docker-entrypoint.d/config.json
+      - ./nginx/html:/usr/share/nginx
+  unit-https:
+    image: "unit:php"
+    profiles: ["https"]
+    volumes:
+      - ./unit/https.json:/docker-entrypoint.d/config.json
+      - ./cert/bundle.pem:/docker-entrypoint.d/bundle.pem
+      - ./nginx/html:/usr/share/nginx

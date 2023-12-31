@@ -1,0 +1,17 @@
+{
+  "listeners": {
+      "*:8080": {
+          "pass": "applications/php",
+          "tls": {
+              "certificate": "bundle"
+          }
+      }
+  },
+  "applications": {
+      "php": {
+          "type": "php",
+          "root": "/usr/share/nginx/"
+      }
+  }
+}
+
