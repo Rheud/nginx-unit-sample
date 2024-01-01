@@ -1,0 +1,20 @@
+services:
+  nginx-https:
+    image: "nginx"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d/cavia-https.conf:/etc/nginx/conf.d/cavia.conf
+      - ./nginx/common:/etc/nginx/common
+      - ./nginx/html:/usr/share/nginx
+      - ./cert/_.luna.jdno.org.crt:/etc/certificates/_.luna.jdno.org.crt
+      - ./cert/_.luna.jdno.org.key:/etc/certificates/_.luna.jdno.org.key
+      - ./cert/dhparam.pem:/etc/certificates/dhparam.pem
+  unit-https:
+    image: "unit:php"
+    volumes:
+      - ./unit/config-https.json:/docker-entrypoint.d/config.json
+      - ./cert/bundle.pem:/docker-entrypoint.d/bundle.pem
+      - ./nginx/html:/usr/share/nginx
+
