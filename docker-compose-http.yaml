@@ -5,11 +5,11 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/conf.d/cavia-http.conf:/etc/nginx/conf.d/cavia.conf
+      - ./nginx/conf.d/http.conf:/etc/nginx/conf.d/http.conf
       - ./nginx/common:/etc/nginx/common
       - ./nginx/html:/usr/share/nginx
-      - ./cert/_.luna.jdno.org.crt:/etc/certificates/_.luna.jdno.org.crt
-      - ./cert/_.luna.jdno.org.key:/etc/certificates/_.luna.jdno.org.key
+      - ./cert/hoge.crt:/etc/certificates/hoge.crt
+      - ./cert/hoge.key:/etc/certificates/hoge.key
       - ./cert/dhparam.pem:/etc/certificates/dhparam.pem
   unit-http:
     image: "unit:php"
