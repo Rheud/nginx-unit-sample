@@ -14,6 +14,6 @@ services:
   unit-http:
     image: "unit:php"
     volumes:
-      - ./unit/config-http.json:/docker-entrypoint.d/config.json
+      - ./unit/http.json:/docker-entrypoint.d/config.json
       - ./nginx/html:/usr/share/nginx
 

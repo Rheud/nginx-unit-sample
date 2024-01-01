@@ -14,7 +14,7 @@ services:
   unit-https:
     image: "unit:php"
     volumes:
-      - ./unit/config-https.json:/docker-entrypoint.d/config.json
+      - ./unit/https.json:/docker-entrypoint.d/config.json
       - ./cert/bundle.pem:/docker-entrypoint.d/bundle.pem
       - ./nginx/html:/usr/share/nginx
 
